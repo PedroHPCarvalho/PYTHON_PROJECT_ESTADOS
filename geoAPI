@@ -1,0 +1,53 @@
+from geopy.geocoders import Nominatim
+import time
+
+def obter_coordenadas(cidade):
+    geolocator = Nominatim(user_agent="teste01")
+    location = geolocator.geocode(cidade)
+    if location:
+        return location.latitude, location.longitude
+    else:
+        print(f"Não foi possível obter as coordenadas para {cidade}")
+        return None
+    
+capitais = [
+    {'UF': 'RO', 'Capital': 'Porto Velho'},
+    {'UF': 'AC', 'Capital': 'Rio Branco'},
+    {'UF': 'AM', 'Capital': 'Manaus'},
+    {'UF': 'RR', 'Capital': 'Boa Vista'},
+    {'UF': 'PA', 'Capital': 'Belém'},
+    {'UF': 'AP', 'Capital': 'Macapá'},
+    {'UF': 'TO', 'Capital': 'Palmas'},
+    {'UF': 'MA', 'Capital': 'São Luís'},
+    {'UF': 'PI', 'Capital': 'Teresina'},
+    {'UF': 'CE', 'Capital': 'Fortaleza'},
+    {'UF': 'RN', 'Capital': 'Natal'},
+    {'UF': 'PB', 'Capital': 'João Pessoa'},
+    {'UF': 'PE', 'Capital': 'Recife'},
+    {'UF': 'AL', 'Capital': 'Maceió'},
+    {'UF': 'SE', 'Capital': 'Aracaju'},
+    {'UF': 'BA', 'Capital': 'Salvador'},
+    {'UF': 'MG', 'Capital': 'Belo Horizonte'},
+    {'UF': 'ES', 'Capital': 'Vitória'},
+    {'UF': 'RJ', 'Capital': 'Rio de Janeiro'},
+    {'UF': 'SP', 'Capital': 'São Paulo'},
+    {'UF': 'PR', 'Capital': 'Curitiba'},
+    {'UF': 'SC', 'Capital': 'Florianópolis'},
+    {'UF': 'RS', 'Capital': 'Porto Alegre'},
+    {'UF': 'MS', 'Capital': 'Campo Grande'},
+    {'UF': 'MT', 'Capital': 'Cuiabá'},
+    {'UF': 'GO', 'Capital': 'Goiânia'},
+    {'UF': 'DF', 'Capital': 'Brasília'}
+]
+
+coordendadas_capitais = []
+
+for capital in capitais:
+    cidade = f"{capital['Capital']}, {capital['UF']}"
+    coordenadas = obter_coordenadas(cidade)
+    if coordenadas:
+        coordendadas_capitais.append({'capital': capital['Capital'], 'latitude': coordenadas[0], 'longitude': coordenadas[1]})
+    time.sleep(1)
+
+print(coordendadas_capitais)
+ 
